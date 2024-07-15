@@ -1,3 +1,4 @@
 streamlit
 openai
 pycountry
+streamlit_option_menu
