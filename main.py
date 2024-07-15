@@ -173,10 +173,17 @@ with st.sidebar:
                                 "📚 Educational Resources", "🚨 Emergency Alerts"],
                          icons=["icon", "icon", "icon", "icon", "icon", "icon"],
                          menu_icon="cast", default_index=0, orientation="vertical")
-client = openai.OpenAI(
-    api_key=st.session_state.api_key,
-    base_url="https://api.aimlapi.com",
-)
+# Load API Key securely
+api_key = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else None
+
+if api_key:
+    client = openai.OpenAI(
+        api_key=api_key,
+        base_url="https://api.openai.com"
+    )
+    # Now perform your API call
+else:
+    st.error("API Key is missing. Please configure your API key.")
 
 # Function to handle OpenAI API interaction
 def ask_openai(messages, role="virtual_nurse"):
