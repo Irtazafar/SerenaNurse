@@ -174,7 +174,9 @@ with st.sidebar:
                          icons=["icon", "icon", "icon", "icon", "icon", "icon"],
                          menu_icon="cast", default_index=0, orientation="vertical")
 # Load API Key securely
-api_key = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else None
+if "api_key_new" in st.secrets:
+    api_key = st.secrets["api_key_new"]
+
 
 if api_key:
     client = openai.OpenAI(
